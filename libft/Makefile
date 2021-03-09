@@ -10,7 +10,8 @@ FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 PILE=	ft_create_elem.c	ft_pile_at.c		ft_pile_push_front.c	\
 		ft_pile_clear.c		ft_pile_last.c		ft_pile_push_back.c		\
 		ft_pile_merge.c		ft_pile_reverse.c	ft_pile_size.c			\
-		ft_pile_print.c		ft_pile_push_back_if_not.c
+		ft_pile_print.c		ft_pile_push_back_if_not.c					\
+		ft_clear_stacks.c
 
 
 SRCS=	$(addprefix integer/, $(INT)) $(addprefix file/, $(FILE))		\

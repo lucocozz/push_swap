@@ -52,3 +52,23 @@ void	ft_clear_sort_list(t_sort_list *sort_list)
 		free(prev);
 	}
 }
+
+void	ft_print_sort_list(t_sort_list *sort_list)
+{
+	while (sort_list)
+	{
+		ft_putnbr(sort_list->value);
+		ft_putstr(" -> ");
+		sort_list = sort_list->next;
+	}
+	ft_putstr("NULL\n");
+}
+
+void	ft_sorting(t_stacks *piles, t_sort_list *sort_list)
+{
+	while (sort_list)
+	{
+		sort_list->ft(piles);
+		sort_list = sort_list->next;
+	}
+}

@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort3.c                                            :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 00:12:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/09 17:41:21 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/03/09 14:08:12 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/03/09 16:05:16 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include <stdio.h>
 
-void	ft_rrr(t_stacks *piles)
+int	main()
 {
-	ft_rra(piles);
-	ft_rrb(piles);
+	puts("sa");
+	puts("sb");
+	puts("pa");
+	puts("rrr");
+	return (0);
 }

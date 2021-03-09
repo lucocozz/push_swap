@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 19:33:16 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/09 00:31:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/03/09 16:21:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void		ft_exit_error(t_stacks piles)
 {
-	ft_pile_clear(piles.a);
-	ft_pile_clear(piles.b);
+	ft_clear_stacks(piles);
 	ft_putstr("Error\n");
 	exit(EXIT_FAILURE);
 }

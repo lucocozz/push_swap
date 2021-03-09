@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort3.c                                            :+:      :+:    :+:   */
+/*   ft_clear_stacks.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 00:12:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/09 17:41:21 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/07/18 08:12:07 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/03/09 16:20:52 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "ft_pile.h"
 
-void	ft_rrr(t_stacks *piles)
+void	ft_clear_stacks(t_stacks stacks)
 {
-	ft_rra(piles);
-	ft_rrb(piles);
+	ft_pile_clear(stacks.a);
+	ft_pile_clear(stacks.b);
+	stacks.a = NULL;
+	stacks.b = NULL;
 }

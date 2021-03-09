@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 04:53:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/08 16:31:29 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/03/09 16:21:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void				ft_pile_reverse(t_pile **begin_pile);
 int					ft_pile_size(t_pile *begin_pile);
 void				ft_pile_print(t_pile *lst);
 char				**ft_pile_to_array(t_pile **alst);
+void				ft_clear_stacks(t_stacks stacks);
 
 #endif
