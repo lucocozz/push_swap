@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:26:25 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/09 18:50:53 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:19:29 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ static t_sort_list	*ft_get_sort_list(void)
 		{
 			ft_clear_sort_list(sort_list);
 			free(line);
-			ret = -1;
-			break;
+			return (NULL);
 		}
 		free(line);
 	}
@@ -71,11 +70,13 @@ static int			ft_is_sorted(t_stacks piles)
 	a = piles.a;
 	if (piles.b)
 		return (0);
-	while (a->next)
+	while (1)
 	{
 		if (a->value > a->next->value)
 			return (0);
 		a = a->next;
+		if (a->next == piles.a)
+			break;
 	}
 	return (1);
 }
@@ -92,6 +93,8 @@ int					main(int argc, char **argv)
 		if (!(sort_list = ft_get_sort_list()))
 			ft_exit_error(piles);
 		ft_sorting(&piles, sort_list);
+		ft_pile_print(piles.a);
+		ft_pile_print(piles.b);
 		if (ft_is_sorted(piles))
 			ft_putstr("OK\n");
 		else

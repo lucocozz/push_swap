@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                       :+:      :+:    :+:   */
+/*   sort_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/08 18:40:37 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/08 18:46:32 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/03/10 18:11:45 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/03/10 18:51:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "checker.h"
 
-t_sort_list	*ft_create_sort_list(int value, void (*ft)(t_stacks*))
+t_sort_list	*ft_create_sort_list(int value, int (*ft)(t_stacks*))
 {
 	t_sort_list *sort;
 
@@ -25,8 +25,8 @@ t_sort_list	*ft_create_sort_list(int value, void (*ft)(t_stacks*))
 	return (sort);
 }
 
-void	ft_push_back_sort(t_sort_list **sort_list, int value,
-void (*ft)(t_stacks*))
+void		ft_push_back_sort(t_sort_list **sort_list, int value,
+int (*ft)(t_stacks*))
 {
 	t_sort_list	*tmp;
 
@@ -41,7 +41,7 @@ void (*ft)(t_stacks*))
 	}
 }
 
-void	ft_clear_sort_list(t_sort_list *sort_list)
+void		ft_clear_sort_list(t_sort_list *sort_list)
 {
 	t_sort_list *prev;
 
@@ -53,18 +53,20 @@ void	ft_clear_sort_list(t_sort_list *sort_list)
 	}
 }
 
-void	ft_print_sort_list(t_sort_list *sort_list)
+void		ft_print_sort_list(t_sort_list *sort_list)
 {
+	static char	*sorts[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr",
+							"rra", "rrb", "rrr"};
+
 	while (sort_list)
 	{
-		ft_putnbr(sort_list->value);
-		ft_putstr(" -> ");
+		ft_putstr(sorts[sort_list->value]);
+		ft_putchar('\n');
 		sort_list = sort_list->next;
 	}
-	ft_putstr("NULL\n");
 }
 
-void	ft_sorting(t_stacks *piles, t_sort_list *sort_list)
+void		ft_sorting(t_stacks *piles, t_sort_list *sort_list)
 {
 	while (sort_list)
 	{

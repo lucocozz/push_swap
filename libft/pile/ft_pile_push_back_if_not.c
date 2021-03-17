@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 06:31:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/08 15:07:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/03/15 16:44:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,9 @@ int	ft_pile_push_back_if_not(t_pile **begin_pile, int value)
 		*begin_pile = ft_create_elem(value);
 	else
 	{
-		while (tmp->next)
-		{
-			if (tmp->value == value)
-				return (0);
-			tmp = tmp->next;
-		}
-		if (tmp->value == value)
+		if (!ft_pile_contain(*begin_pile, value))
 			return (0);
-		tmp->next = ft_create_elem(value);
+		ft_pile_push_back(begin_pile, value);
 	}
 	return (1);
 }

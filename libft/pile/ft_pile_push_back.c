@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 06:31:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/05 18:46:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:05:39 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_pile_push_back(t_pile **begin_pile, int value)
 {
+	t_pile	*new;
 	t_pile	*tmp;
 
 	tmp = *begin_pile;
@@ -21,8 +22,10 @@ void	ft_pile_push_back(t_pile **begin_pile, int value)
 		*begin_pile = ft_create_elem(value);
 	else
 	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = ft_create_elem(value);
+		new = ft_create_elem(value);
+		new->next = tmp;
+		new->prev = tmp->prev;
+		tmp->prev->next = new;
+		tmp->prev = new;
 	}
 }

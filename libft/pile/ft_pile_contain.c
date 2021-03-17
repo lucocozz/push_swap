@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pile_reverse.c                                  :+:      :+:    :+:   */
+/*   ft_pile_contain.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/18 21:44:16 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/05 18:36:12 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/03/15 16:37:04 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/03/15 16:41:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pile.h"
+#include "libft.h"
 
-void	ft_pile_reverse(t_pile **begin_pile)
+int	ft_pile_contain(t_pile *pile, int value)
 {
-	t_pile *prev;
-	t_pile *next;
-	t_pile *curr;
+	t_pile	*tmp;
 
-	prev = 0;
-	curr = *begin_pile;
-	if (!curr || !curr->next)
-		return ;
-	while (curr)
+	tmp = pile;
+	while (tmp->next != pile)
 	{
-		next = curr->next;
-		curr->next = prev;
-		prev = curr;
-		curr = next;
+		if (tmp->value == value)
+			return (0);
+		tmp = tmp->next;
 	}
-	*begin_pile = prev;
+	if (tmp->value == value)
+		return (0);
+	return (1);
 }

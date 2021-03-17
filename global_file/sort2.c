@@ -1,28 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pile_at.c                                       :+:      :+:    :+:   */
+/*   sort2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/18 20:54:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/05 18:35:22 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/03/09 00:11:26 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/03/15 22:37:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pile.h"
+#include "checker.h"
 
-t_pile	*ft_pile_at(t_pile *begin_pile, unsigned int nbr)
+int	ft_ra(t_stacks *piles)
 {
-	unsigned int i;
+	piles->a = piles->a->next;
+	return (RA);
+}
 
-	i = 0;
-	if (!begin_pile)
-		return (NULL);
-	while (i < nbr && begin_pile->next != NULL)
-	{
-		begin_pile = begin_pile->next;
-		i++;
-	}
-	return (begin_pile);
+int	ft_rb(t_stacks *piles)
+{
+	piles->b = piles->b->next;
+	return (RB);
+}
+
+int	ft_rr(t_stacks *piles)
+{
+	ft_ra(piles);
+	ft_rb(piles);
+	return (RR);
+}
+
+int	ft_rra(t_stacks *piles)
+{
+	piles->a = piles->a->prev;
+	return (RRA);
+}
+
+int	ft_rrb(t_stacks *piles)
+{
+	piles->b = piles->b->prev;
+	return (RRB);
 }

@@ -6,14 +6,15 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 00:12:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/09 17:41:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/03/10 18:47:09 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_rrr(t_stacks *piles)
+int	ft_rrr(t_stacks *piles)
 {
 	ft_rra(piles);
 	ft_rrb(piles);
+	return (RRR);
 }

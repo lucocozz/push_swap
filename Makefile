@@ -2,11 +2,12 @@ CHECKER_NAME=	checker
 
 PUSH_SWAP_NAME=	push_swap
 
-CHECKER_SRCS=	main.c		sort.c		sort2.c		sort3.c
+CHECKER_SRCS=	main.c
 
-PUSH_SWAP_SRCS=	main.c
+PUSH_SWAP_SRCS=	main.c	ft_sorting.c
 
-GLOBAL_SRCS=	ft_parsing.c	sort_list.c
+GLOBAL_SRCS=	ft_parsing.c	sort_list.c		sort.c		sort2.c		\
+				sort3.c
 
 CHECKER= $(addprefix checker_file/, $(CHECKER_SRCS))
 
