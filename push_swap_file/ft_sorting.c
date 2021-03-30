@@ -6,25 +6,11 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 19:05:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/27 19:55:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:16:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_is_ascent(t_pile *pile)
-{
-	t_pile	*tmp;
-
-	tmp = pile;
-	while (tmp->next != pile)
-	{
-		if (tmp->value < tmp->next->value)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
 
 int	ft_is_descent(t_pile *pile)
 {
@@ -40,40 +26,78 @@ int	ft_is_descent(t_pile *pile)
 	return (1);
 }
 
-t_sort_list			*ft_sort_pile_a(t_stacks *piles, t_range range)
+static void	ft_rotate_back(t_stacks *piles, t_sort_list *sort_list, int i)
 {
-	t_sort_list	*sort_list;
-
-	sort_list = NULL;
-	while (1)
+	if (i > 0)
 	{
-		if (piles->a->value == range.min)
-			if (ft_is_descent(piles->a))
-					return (sort_list);
-		if (piles->a->value == range.max)
-			ft_push_back_sort(&sort_list, ft_ra(piles), NULL);
-		else if (piles->a->value < piles->a->next->value)
-			ft_push_back_sort(&sort_list, ft_ra(piles), NULL);
-		else
-			ft_push_back_sort(&sort_list, ft_sa(piles), NULL);
+		ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
+		ft_rotate_back(piles, sort_list, i - 1);
+		ft_push_back_sort(&sort_list, ft_rrb(piles), NULL);
+	}
+	if (i == 0)
+		ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
+}
+
+static void	ft_rotate_front(t_stacks *piles, t_sort_list *sort_list, int i)
+{
+	if (i > 0)
+	{
+		ft_push_back_sort(&sort_list, ft_rrb(piles), NULL);
+		ft_rotate_front(piles, sort_list, i - 1);
+		ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
+	}
+	if (i == 0)
+	{
+		ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
+		ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
 	}
 }
 
-t_sort_list			*ft_sort_pile_b(t_stacks *piles, t_range range)
+t_sort_list	*ft_insert_sort(t_stacks *piles, t_pile_data data)
 {
+	int			i;
+	int			j;
+	int			size;
+	t_pile		*tmp;
+	t_pile		*tmp_rev;
 	t_sort_list	*sort_list;
 
+	size = 1;
 	sort_list = NULL;
-	while (1)
+	ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
+	while (piles->a)
 	{
-		if (piles->b->value == range.max)
-			if (ft_is_ascent(piles->b))
-					return (sort_list);
-		if (piles->b->value == range.min)
+		i = 0;
+		j = 0;
+		tmp = piles->b;
+		tmp_rev = piles->b->prev;
+		if (piles->a->value == data.min)
+		{
+			ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
 			ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
-		else if (piles->b->value > piles->b->next->value)
-			ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
+		}
 		else
-			ft_push_back_sort(&sort_list, ft_sb(piles), NULL);
+		{
+			while (piles->a->value < tmp->value)
+			{
+				tmp = tmp->next;
+				if (tmp == piles->b)
+					break;
+				i++;
+			}
+			while (piles->a->value > tmp_rev->value)
+			{
+				tmp_rev = tmp_rev->prev;
+				if (tmp_rev == piles->b->prev)
+					break;
+				j++;
+			}
+			if (j < i && i != 0)
+				ft_rotate_front(piles, sort_list, j);
+			else
+				ft_rotate_back(piles, sort_list, i);
+		}
+		size++;
 	}
+	return (sort_list);
 }
