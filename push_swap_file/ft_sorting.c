@@ -6,25 +6,11 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 19:05:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/30 13:16:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:23:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_is_descent(t_pile *pile)
-{
-	t_pile	*tmp;
-
-	tmp = pile;
-	while (tmp->next != pile)
-	{
-		if (tmp->value > tmp->next->value)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
 
 static void	ft_rotate_back(t_stacks *piles, t_sort_list *sort_list, int i)
 {
