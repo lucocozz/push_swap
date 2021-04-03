@@ -6,84 +6,115 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 19:05:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/30 13:23:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/03 18:06:16 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_rotate_back(t_stacks *piles, t_sort_list *sort_list, int i)
+static void	ft_rotate_back(t_stacks *piles, t_pile_data data,
+t_sort_list *sort_list, t_index index)
 {
-	if (i > 0)
+	if (piles->b != index.tmp_i)
 	{
 		ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
-		ft_rotate_back(piles, sort_list, i - 1);
+		ft_rotate_back(piles, data, sort_list, index);
+		if (piles->a)
+		{
+			index = ft_get_insert_pos(&(t_stacks){piles->a, data.head});
+			if (index.tmp_i == piles->b)
+				ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
+		}
 		ft_push_back_sort(&sort_list, ft_rrb(piles), NULL);
 	}
-	if (i == 0)
+	else
 		ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
 }
 
-static void	ft_rotate_front(t_stacks *piles, t_sort_list *sort_list, int i)
+static void	ft_rotate_front(t_stacks *piles, t_pile_data data,
+t_sort_list *sort_list, t_index index)
 {
-	if (i > 0)
+	if (piles->b->prev != index.tmp_j)
 	{
 		ft_push_back_sort(&sort_list, ft_rrb(piles), NULL);
-		ft_rotate_front(piles, sort_list, i - 1);
+		ft_rotate_front(piles, data, sort_list, index);
+		if (piles->a && piles->a->value != data.min)
+		{
+			index = ft_get_insert_pos(&(t_stacks){piles->a, data.head});
+			if (index.tmp_j == piles->b->prev)
+			{
+				ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
+				ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
+			}
+		}
 		ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
 	}
-	if (i == 0)
+	else
 	{
 		ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
 		ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
 	}
+}
+
+t_index		ft_get_insert_pos(t_stacks *piles)
+{
+	t_index	index;
+
+	index.i = 0;
+	index.j = 0;
+	index.tmp_i = piles->b;
+	index.tmp_j = piles->b->prev;
+	while (piles->a->value < index.tmp_i->value)
+	{
+		index.tmp_i = index.tmp_i->next;
+		if (index.tmp_i == piles->b)
+		{
+			index.tmp_i = index.tmp_i->prev;
+			break;
+		}
+		index.i++;
+	}
+	while (piles->a->value > index.tmp_j->value)
+	{
+		index.tmp_j = index.tmp_j->prev;
+		if (index.tmp_j == piles->b->prev)
+		{
+			index.tmp_j = index.tmp_j->next;
+			break;
+		}
+		index.j++;
+	}
+	return (index);
 }
 
 t_sort_list	*ft_insert_sort(t_stacks *piles, t_pile_data data)
 {
-	int			i;
-	int			j;
-	int			size;
-	t_pile		*tmp;
-	t_pile		*tmp_rev;
+	t_index		index;
 	t_sort_list	*sort_list;
 
-	size = 1;
+	data.size = 1;
 	sort_list = NULL;
 	ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
+	ft_pile_print(piles->b);
 	while (piles->a)
 	{
-		i = 0;
-		j = 0;
-		tmp = piles->b;
-		tmp_rev = piles->b->prev;
-		if (piles->a->value == data.min)
+		data.head = piles->b;
+		if ((piles->a->value == data.min) || (data.size == 1
+			&& piles->a->value < piles->b->value))
 		{
 			ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
 			ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
 		}
 		else
 		{
-			while (piles->a->value < tmp->value)
-			{
-				tmp = tmp->next;
-				if (tmp == piles->b)
-					break;
-				i++;
-			}
-			while (piles->a->value > tmp_rev->value)
-			{
-				tmp_rev = tmp_rev->prev;
-				if (tmp_rev == piles->b->prev)
-					break;
-				j++;
-			}
-			if (j < i && i != 0)
-				ft_rotate_front(piles, sort_list, j);
+			index = ft_get_insert_pos(piles);
+			if (index.j < index.i && index.i != 0)
+				ft_rotate_front(piles, data, sort_list, index);
 			else
-				ft_rotate_back(piles, sort_list, i);
+				ft_rotate_back(piles, data, sort_list, index);
 		}
-		size++;
+		data.size++;
+		ft_pile_print(piles->b);
 	}
 	return (sort_list);
 }

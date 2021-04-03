@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:23:55 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/28 20:15:03 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/03/30 20:16:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ static t_pile_data	ft_get_pile_data(t_pile *pile)
 	data.mediane = tmp_sort->value;
 	ft_pile_clear(pile_sort);
 	return (data);
+}
+
+void			ft_append_list(t_sort_list **sort_list, t_sort_list *next)
+{
+	t_sort_list *tmp;
+
+	tmp = *sort_list;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = next;
 }
 
 int					main(int argc, char **argv)
