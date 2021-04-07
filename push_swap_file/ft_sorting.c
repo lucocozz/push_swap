@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 19:05:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/03 18:06:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:51:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,17 @@ t_sort_list *sort_list, t_index index)
 		if (piles->a)
 		{
 			index = ft_get_insert_pos(&(t_stacks){piles->a, data.head});
-			if (index.tmp_i == piles->b)
+			// printf("actual=%d\nnext=%d\n", piles->a->value, piles->a->next->value);
+			if (index.i > data.origin)
+			{
+				data.origin = index.i;
+				ft_rotate_back(piles, data, sort_list, index);
+			}
+			else if (index.tmp_i == piles->b)
+			{
+				// printf("%d\n", piles->a->value);
 				ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
+			}
 		}
 		ft_push_back_sort(&sort_list, ft_rrb(piles), NULL);
 	}
@@ -41,6 +50,11 @@ t_sort_list *sort_list, t_index index)
 		if (piles->a && piles->a->value != data.min)
 		{
 			index = ft_get_insert_pos(&(t_stacks){piles->a, data.head});
+			// if (index.j > data.origin)
+			// {
+			// 	data.origin = index.j;
+			// 	ft_rotate_front(piles, data, sort_list, index);
+			// }
 			if (index.tmp_j == piles->b->prev)
 			{
 				ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
@@ -94,13 +108,15 @@ t_sort_list	*ft_insert_sort(t_stacks *piles, t_pile_data data)
 
 	data.size = 1;
 	sort_list = NULL;
+	ft_pile_print(piles->a);
 	ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
 	ft_pile_print(piles->b);
 	while (piles->a)
 	{
 		data.head = piles->b;
-		if ((piles->a->value == data.min) || (data.size == 1
-			&& piles->a->value < piles->b->value))
+		if (piles->a->value > piles->b->value)
+			ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
+		else if (piles->a->value < piles->b->prev->value)
 		{
 			ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
 			ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
@@ -109,12 +125,18 @@ t_sort_list	*ft_insert_sort(t_stacks *piles, t_pile_data data)
 		{
 			index = ft_get_insert_pos(piles);
 			if (index.j < index.i && index.i != 0)
+			{
+				data.origin = index.j;
 				ft_rotate_front(piles, data, sort_list, index);
+			}
 			else
+			{
+				data.origin = index.i;
 				ft_rotate_back(piles, data, sort_list, index);
+			}
 		}
 		data.size++;
-		ft_pile_print(piles->b);
+		// ft_pile_print(piles->b);
 	}
 	return (sort_list);
 }
