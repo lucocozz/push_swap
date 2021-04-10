@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 19:34:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/10 18:51:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/09 17:58:48 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GLOBAL_H
 
 # include "libft.h"
+# include <stdio.h>
 
 enum					e_sort_list
 {

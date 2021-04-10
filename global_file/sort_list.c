@@ -6,12 +6,12 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:11:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/10 18:51:15 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:28:00 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "checker.h"
+#include "global.h"
 
 t_sort_list	*ft_create_sort_list(int value, int (*ft)(t_stacks*))
 {

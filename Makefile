@@ -21,7 +21,7 @@ GLOBAL=		$(addprefix global_file/, $(GLOBAL_SRCS))
 
 CC=		clang
 
-CFLAGS= -Wall -Wextra -Werror -I includes/ -I libft/includes/ -L libft/ -lft
+CFLAGS= -Wall -Wextra -Werror -I includes/ -I libft/includes/ -L libft/ -lft -g3
 
 
 all: lib $(CHECKER_NAME) $(PUSH_SWAP_NAME)
