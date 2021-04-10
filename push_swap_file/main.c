@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:23:55 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/10 15:17:51 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/10 21:35:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		ft_get_segments(t_pile_data *data, t_pile *pile_sort, int size)
 		if (tmp_sort == pile_sort)
 			break;
 	}
-	data->segments[i].size = j - 1;
+	data->segments[i].size = j;
 	data->segments[i].max = tmp_sort->prev->value;
 }
 
@@ -111,7 +111,6 @@ int					main(int argc, char **argv)
 		sort_list = ft_optimize_sort(sort_list);
 		free(data.segments);
 		ft_print_sort_list(sort_list);
-		// ft_pile_print(piles.a);
 		ft_clear_sort_list(sort_list);
 		ft_clear_stacks(piles);
 	}
