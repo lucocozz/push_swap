@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 19:34:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/09 17:58:48 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/23 15:19:36 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		ft_push_back_sort(t_sort_list **sort_list, int value,
 void		ft_clear_sort_list(t_sort_list *sort_list);
 void		ft_print_sort_list(t_sort_list *sort_list);
 void		ft_sorting(t_stacks *piles, t_sort_list *sort_list);
+int			ft_is_crescent(t_pile *pile);
 
 void		ft_exit_error(t_stacks piles);
 t_pile		*ft_parsing(int size, char **numbers);

@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 19:05:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/10 21:36:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/23 16:41:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int			ft_in_range(int value, t_range range)
+int					ft_in_range(int value, t_range range)
 {
 	if (value >= range.min && value <= range.max)
 		return (1);
@@ -28,9 +28,9 @@ static int			ft_find_range(t_pile *pile, t_range range)
 	tmp_rev = pile->prev;
 	while (1)
 	{
-		if (tmp->value >= range.min && tmp->value <= range.max)
+		if (ft_in_range(tmp->value, range))
 			return (1);
-		if (tmp_rev->value >= range.min && tmp_rev->value <= range.max)
+		if (ft_in_range(tmp->value, range))
 			return (0);
 		tmp = tmp->next;
 		tmp_rev = tmp_rev->prev;
@@ -68,10 +68,12 @@ static t_sort_list	*ft_split_segments(t_stacks *piles, t_pile_data data)
 		j = 0;
 		while (j < data.segments[i].size)
 		{
+			if (ft_in_range(piles->a->value, data.end))
+				ft_push_back_sort(&sort_list, ft_ra(piles), NULL);
 			if (ft_in_range(piles->a->value, data.segments[i]))
 			{
-				ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
-				j++;
+					ft_push_back_sort(&sort_list, ft_pb(piles), NULL);
+					j++;
 			}
 			else if (ft_find_range(piles->a, data.segments[i]))
 				while (!ft_in_range(piles->a->value, data.segments[i]))
@@ -85,28 +87,45 @@ static t_sort_list	*ft_split_segments(t_stacks *piles, t_pile_data data)
 	return (sort_list);
 }
 
+void				ft_sort_three(t_stacks *piles, t_sort_list **sort_list)
+{
+	while (!ft_is_crescent(piles->a))
+	{
+		if (piles->a->value > piles->a->next->value)
+			ft_push_back_sort(sort_list, ft_sa(piles), NULL);
+		else if (piles->a->prev->value < piles->a->next->value)
+			ft_push_back_sort(sort_list, ft_rra(piles), NULL);
+		else if (piles->a->value > piles->a->prev->value)
+			ft_push_back_sort(sort_list, ft_ra(piles), NULL);
+	}
+}
+
 t_sort_list			*ft_sort_pile(t_stacks *piles, t_pile_data data)
 {
 	t_pile		*pile_sorted;
 	t_sort_list	*sort_list;
 
 	sort_list = ft_split_segments(piles, data);
-	pile_sorted = ft_pile_sort_insert(piles->b);
-	pile_sorted = pile_sorted->prev;
-	while (piles->b)
-	{	
-		if (piles->b->value == pile_sorted->value)
-		{
-			ft_push_back_sort(&sort_list, ft_pa(piles), NULL);
-			pile_sorted = pile_sorted->prev;
+	ft_sort_three(piles, &sort_list);
+	if (piles->b)
+	{
+		pile_sorted = ft_pile_sort_insert(piles->b);
+		pile_sorted = pile_sorted->prev;
+		while (piles->b)
+		{	
+			if (piles->b->value == pile_sorted->value)
+			{
+				ft_push_back_sort(&sort_list, ft_pa(piles), NULL);
+				pile_sorted = pile_sorted->prev;
+			}
+			else if (ft_find_value(piles->b, pile_sorted->value))
+				while (piles->b->value != pile_sorted->value)
+					ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
+			else
+				while (piles->b->value != pile_sorted->value)
+					ft_push_back_sort(&sort_list, ft_rrb(piles), NULL);
 		}
-		else if (ft_find_value(piles->b, pile_sorted->value))
-			while (piles->b->value != pile_sorted->value)
-				ft_push_back_sort(&sort_list, ft_rb(piles), NULL);
-		else
-			while (piles->b->value != pile_sorted->value)
-				ft_push_back_sort(&sort_list, ft_rrb(piles), NULL);
+		ft_pile_clear(pile_sorted);
 	}
-	ft_pile_clear(pile_sorted);
 	return (sort_list);
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:25:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/10 20:24:46 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/22 18:54:06 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # define FACTOR 50
 # define LIMIT FACTOR / 2 - 1
 
+typedef enum	e_direction
+{
+	BACK,
+	FRONT
+}				e_direction;
+
 typedef	struct	s_range
 {
 	int			size;
@@ -27,12 +33,36 @@ typedef	struct	s_range
 	int			max;
 }				t_range;
 
+typedef struct	s_index
+{
+	int			index;
+	e_direction	dir;
+
+}				t_index;
+
+typedef struct	s_insert
+{
+	int			min;
+	t_index		pos;
+	t_index		value;
+
+}				t_insert;
+
 typedef struct	s_pile_data
 {
 	int			size;
+	t_range		end;
 	t_range		*segments;
 }				t_pile_data;
 
+typedef struct	s_data_pos
+{
+	int			value;
+	t_index		val;
+}				t_data_pos;
+
 t_sort_list		*ft_sort_pile(t_stacks *piles, t_pile_data data);
+t_insert		ft_find_insert(t_stacks *piles);
+int				ft_in_range(int value, t_range range);
 
 #endif
