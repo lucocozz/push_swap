@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 16:32:51 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/16 17:57:40 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/24 00:36:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_pile	*ft_pile_sort_insert(t_pile *pile)
 	t_pile	*tmp;
 	t_pile	*tmp_sort;
 	t_pile	*pile_sort;
-	
+
 	pile_sort = NULL;
 	tmp = pile->next;
 	ft_pile_push_front(&pile_sort, pile->value);

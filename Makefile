@@ -4,7 +4,7 @@ PUSH_SWAP_NAME=	push_swap
 
 CHECKER_SRCS=	main.c
 
-PUSH_SWAP_SRCS=	main.c	ft_sorting.c
+PUSH_SWAP_SRCS=	main.c	ft_sorting.c	ft_sorting2.c
 
 GLOBAL_SRCS=	ft_parsing.c	sort_list.c		sort.c		sort2.c		\
 				sort3.c
@@ -21,7 +21,7 @@ GLOBAL=		$(addprefix global_file/, $(GLOBAL_SRCS))
 
 CC=		clang
 
-CFLAGS= -Wall -Wextra -Werror -I includes/ -I libft/includes/ -L libft/ -lft
+CFLAGS= -Wall -Wextra -Werror -I includes/ -I libft/includes/ -L libft/ -lft -g3
 
 
 all: lib $(CHECKER_NAME) $(PUSH_SWAP_NAME)

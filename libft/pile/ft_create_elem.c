@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 05:16:54 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/15 16:11:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/24 00:35:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 t_pile	*ft_create_elem(int value)
 {
-	t_pile *elem;
+	t_pile	*elem;
 
-	if ((elem = malloc(sizeof(t_pile) * 1)) == NULL)
+	elem = malloc(sizeof(t_pile) * 1);
+	if (elem == NULL)
 		return (NULL);
 	elem->value = value;
 	elem->next = elem;

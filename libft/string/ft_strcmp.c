@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 23:38:48 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/08 23:39:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/24 00:36:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while ((s1[i] != '\0' || s2[i] != '\0'))
