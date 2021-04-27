@@ -14,7 +14,7 @@ function ProgressBar {
     let _left=40-$_done
     _fill=$(printf "%${_done}s")
     _empty=$(printf "%${_left}s")
-    printf "\rProgress : |${_fill// /${COLOR_GREEN}█${COLOR_RESET}}${_empty// /-}| ${_progress}%%"
+    printf "\rProgress : |${_fill// /${COLOR_GREEN}█${COLOR_RESET}}${_empty// /-}| ${1}/${2}"
 
 }
 

@@ -4,7 +4,7 @@ PUSH_SWAP_NAME=	push_swap
 
 CHECKER_SRCS=	main.c
 
-PUSH_SWAP_SRCS=	main.c	ft_sorting.c
+PUSH_SWAP_SRCS=	main.c	ft_sorting.c	ft_sorting2.c
 
 GLOBAL_SRCS=	ft_parsing.c	sort_list.c		sort.c		sort2.c		\
 				sort3.c

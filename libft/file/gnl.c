@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:28:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/08 19:28:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/27 13:52:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int				get_next_line(char **line)
 	char	c;
 	int		ret;
 	char	*str;
-	
+
 	c = '\0';
 	ret = 1;
 	if ((str = malloc(sizeof(char) * 1)) == NULL)

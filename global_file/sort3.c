@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 00:12:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/23 15:23:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/23 20:43:48 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_is_crescent(t_pile *pile)
 			return (0);
 		tmp = tmp->next;
 		if (tmp->next == pile)
-			break;
+			break ;
 	}
 	return (1);
 }

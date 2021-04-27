@@ -6,40 +6,37 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:23:55 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/23 16:39:53 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/27 16:32:39 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void		ft_get_segments(t_pile_data *data, t_pile *pile_sort, int size,
-	int factor)
+static void			ft_get_segments(t_pile_data *data, t_pile *pile_sort,
+	int size, int factor)
 {
-	int		i;
-	int		j;
-	int		k;
+	t_count	c;
 	t_pile	*tmp_sort;
 
-	i = 0;
-	j = 0;
-	k = 0;
+	c.i = 0;
+	c.j = 0;
+	c.k = 0;
 	tmp_sort = pile_sort;
-	data->segments[i].min = tmp_sort->value;
-	while (k <= size - 3)
+	data->segments[c.i].min = tmp_sort->value;
+	while (c.k++ <= size - 3)
 	{
-		if (j == factor && size >= factor / 2 - 1)
+		if (c.j == factor && size >= factor / 2 - 1)
 		{
-			data->segments[i].max = tmp_sort->prev->value;
-			data->segments[i].size = j;
-			data->segments[++i].min = tmp_sort->value;
-			j = 0;
+			data->segments[c.i].max = tmp_sort->prev->value;
+			data->segments[c.i].size = c.j;
+			data->segments[++c.i].min = tmp_sort->value;
+			c.j = 0;
 		}
 		tmp_sort = tmp_sort->next;
-		j++;
-		k++;
+		c.j++;
 	}
-	data->segments[i].size = j;
-	data->segments[i].max = tmp_sort->prev->value;
+	data->segments[c.i].size = c.j;
+	data->segments[c.i].max = tmp_sort->prev->value;
 	data->end.min = tmp_sort->value;
 	data->end.max = pile_sort->prev->value;
 }
