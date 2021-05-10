@@ -59,7 +59,7 @@ int	ft_pa(t_stacks *piles)
 		}
 		else
 			piles->b = NULL;
-		free(tmp);
+		gc_free(tmp);
 		tmp = NULL;
 	}
 	return (PA);
@@ -81,7 +81,7 @@ int	ft_pb(t_stacks *piles)
 		}
 		else
 			piles->a = NULL;
-		free(tmp);
+		gc_free(tmp);
 		tmp = NULL;
 	}
 	return (PB);

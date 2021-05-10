@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 19:34:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/27 13:52:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:31:07 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <stdio.h>
+# include "libgc.h"
 
 enum					e_sort_list
 {

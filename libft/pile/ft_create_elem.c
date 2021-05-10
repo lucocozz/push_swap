@@ -16,7 +16,7 @@ t_pile	*ft_create_elem(int value)
 {
 	t_pile	*elem;
 
-	elem = malloc(sizeof(t_pile) * 1);
+	elem = gc_alloc(sizeof(t_pile) * 1);
 	if (elem == NULL)
 		return (NULL);
 	elem->value = value;

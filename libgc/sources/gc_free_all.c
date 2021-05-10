@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pile_clear.c                                    :+:      :+:    :+:   */
+/*   gc_free_all.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/18 08:12:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/15 21:30:44 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/05 15:04:42 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/10 21:34:17 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pile.h"
+#include "libgc.h"
 
-void	ft_pile_clear(t_pile *pile)
+void	gc_free_all(void)
 {
-	t_pile	*tmp;
-	t_pile	*next;
+	t_garbage_lst	**garbage;
+	t_garbage_lst	*current;
+	t_garbage_lst	*next;
 
-	if (pile)
+	garbage = get_garbage_lst();
+	current = *garbage;
+	while (current)
 	{
-		tmp = pile->next;
-		while (tmp != pile)
-		{
-			next = tmp->next;
-			gc_free(tmp);
-			tmp = next;
-		}
-		gc_free(pile);
+		next = current->next;
+		free(current->ptr);
+		current->ptr = NULL;
+		free(current);
+		current = next;
 	}
 }

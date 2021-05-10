@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pile_clear.c                                    :+:      :+:    :+:   */
+/*   gc_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/18 08:12:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/15 21:30:44 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/02 13:01:22 by rotrojan          #+#    #+#             */
+/*   Updated: 2021/05/10 21:36:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pile.h"
+#include "libgc.h"
 
-void	ft_pile_clear(t_pile *pile)
+static void	ft_putstr_fd(int fd, char *str)
 {
-	t_pile	*tmp;
-	t_pile	*next;
+	int	i;
 
-	if (pile)
-	{
-		tmp = pile->next;
-		while (tmp != pile)
-		{
-			next = tmp->next;
-			gc_free(tmp);
-			tmp = next;
-		}
-		gc_free(pile);
-	}
+	i = 0;
+	while (str[i])
+		i++;
+	write(fd, str, i);
+}
+
+void	gc_exit(int status, char *message)
+{
+	gc_free_all();
+	if (status == EXIT_SUCCESS && message != NULL)
+		ft_putstr_fd(STDOUT_FILENO, message);
+	else if (status == EXIT_FAILURE)
+		ft_putstr_fd(STDERR_FILENO, message);
+	exit(status);
 }

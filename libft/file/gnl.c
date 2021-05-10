@@ -18,7 +18,7 @@ static char		*ft_append_char(char *str, char c)
 	char	*str_new;
 
 	i = 0;
-	if ((str_new = malloc(sizeof(char) * (ft_strlen(str) + 2))) == NULL)
+	if ((str_new = gc_alloc(sizeof(char) * (ft_strlen(str) + 2))) == NULL)
 		return (NULL);
 	while (str[i])
 	{
@@ -27,7 +27,7 @@ static char		*ft_append_char(char *str, char c)
 	}
 	str_new[i] = c;
 	str_new[i + 1] = '\0';
-	free(str);
+	gc_free(str);
 	return (str_new);
 }
 
@@ -39,7 +39,7 @@ int				get_next_line(char **line)
 
 	c = '\0';
 	ret = 1;
-	if ((str = malloc(sizeof(char) * 1)) == NULL)
+	if ((str = gc_alloc(sizeof(char) * 1)) == NULL)
 		return (-1);
 	str[0] = '\0';
 	while (c != '\n' && ret != 0)

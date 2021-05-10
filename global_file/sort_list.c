@@ -17,7 +17,7 @@ t_sort_list	*ft_create_sort_list(int value, int (*ft)(t_stacks*))
 {
 	t_sort_list *sort;
 
-	if ((sort = malloc(sizeof(t_sort_list) * 1)) == NULL)
+	if ((sort = gc_alloc(sizeof(t_sort_list) * 1)) == NULL)
 		return (NULL);
 	sort->value = value;
 	sort->ft = ft;
@@ -49,7 +49,7 @@ void		ft_clear_sort_list(t_sort_list *sort_list)
 	{
 		prev = sort_list;
 		sort_list = sort_list->next;
-		free(prev);
+		gc_free(prev);
 	}
 }
 

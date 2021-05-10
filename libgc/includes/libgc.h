@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pile_clear.c                                    :+:      :+:    :+:   */
+/*   libgc.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/18 08:12:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/03/15 21:30:44 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/01 16:05:23 by rotrojan          #+#    #+#             */
+/*   Updated: 2021/05/10 21:04:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pile.h"
+#ifndef LIBGC_H
+# define LIBGC_H
 
-void	ft_pile_clear(t_pile *pile)
+# include <stdlib.h>
+# include <unistd.h>
+
+typedef struct s_garbage_lst
 {
-	t_pile	*tmp;
-	t_pile	*next;
+	void					*ptr;
+	struct s_garbage_lst	*next;
+}							t_garbage_lst;
 
-	if (pile)
-	{
-		tmp = pile->next;
-		while (tmp != pile)
-		{
-			next = tmp->next;
-			gc_free(tmp);
-			tmp = next;
-		}
-		gc_free(pile);
-	}
-}
+void			*gc_alloc(size_t size);
+void			gc_free(void *garbage_to_free);
+void			gc_free_all(void);
+void			gc_exit(int status, char *message);
+t_garbage_lst	**get_garbage_lst(void);
+
+#endif

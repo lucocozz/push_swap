@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:23:55 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/27 16:32:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:39:24 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_pile_data	ft_get_pile_data(t_pile *pile)
 		data.size = (size / factor) + (size % factor ? 1 : 0);
 	else
 		data.size = 1;
-	data.segments = malloc(sizeof(t_range) * (data.size + 1));
+	data.segments = gc_alloc(sizeof(t_range) * (data.size + 1));
 	ft_get_segments(&data, pile_sort, size, factor);
 	ft_pile_clear(pile_sort);
 	return (data);
@@ -75,13 +75,17 @@ int					main(int argc, char **argv)
 	{
 		piles.a = ft_parsing(argc - 1, &argv[1]);
 		if (ft_is_crescent(piles.a))
-			return (0);
+		{
+			ft_clear_stacks(piles);
+			gc_exit(EXIT_SUCCESS, NULL);
+		}
 		data = ft_get_pile_data(piles.a);
 		sort_list = ft_sort_pile(&piles, data);
-		free(data.segments);
+		gc_free(data.segments);
 		ft_print_sort_list(sort_list);
 		ft_clear_sort_list(sort_list);
 		ft_clear_stacks(piles);
 	}
+	gc_exit(EXIT_SUCCESS, NULL);
 	return (0);
 }
