@@ -1,23 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_exit.c                                          :+:      :+:    :+:   */
+/*   gc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/02 13:01:22 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/11 17:36:16 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/11 16:35:04 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/11 17:35:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libgc.h"
 
-void	gc_exit(int status, char *message)
+void	gc_memdel(void **ap)
 {
-	gc_free_all();
-	if (status == EXIT_SUCCESS && message != NULL)
-		gc_putstr_fd(STDOUT_FILENO, message);
-	else if (status == EXIT_FAILURE)
-		gc_putstr_fd(STDERR_FILENO, message);
-	exit(status);
+	if (ap && *ap)
+	{
+		free(*ap);
+		*ap = NULL;
+	}
+}
+
+void	gc_bzero(void *s, size_t n)
+{
+	unsigned char	*ptr;
+	size_t			i;
+
+	ptr = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+}
+
+void	gc_putstr_fd(int fd, char const *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	write(fd, str, i);
 }

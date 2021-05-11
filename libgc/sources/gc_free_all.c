@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 15:04:42 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 21:34:17 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:36:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ void	gc_free_all(void)
 	while (current)
 	{
 		next = current->next;
-		free(current->ptr);
-		current->ptr = NULL;
-		free(current);
+		gc_memdel((void **)&current->ptr);
+		gc_memdel((void **)&current);
 		current = next;
 	}
 }

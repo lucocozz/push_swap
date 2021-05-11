@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:26:25 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 21:41:18 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:34:00 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static t_sort_list	*ft_get_sort_list(void)
 		}
 		gc_free(line);
 	}
-	gc_free(line);
+	if (ret == 0)
+		gc_free(line);
 	return (ret == -1 ? NULL : sort_list);
 }
 
@@ -79,6 +80,8 @@ int					main(int argc, char **argv)
 	if (argc > 2)
 	{
 		piles.a = ft_parsing(argc - 1, &argv[1]);
+		if (ft_is_sorted(piles))
+			gc_exit(EXIT_SUCCESS, NULL);
 		if (!(sort_list = ft_get_sort_list()))
 			ft_exit_error(piles);
 		ft_sorting(&piles, sort_list);
