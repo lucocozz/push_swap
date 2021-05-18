@@ -6,20 +6,19 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:28:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/27 13:52:04 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 02:38:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*ft_append_char(char *str, char c)
+static char	*ft_append_char(char *str, char c)
 {
 	int		i;
 	char	*str_new;
 
 	i = 0;
-	if ((str_new = gc_alloc(sizeof(char) * (ft_strlen(str) + 2))) == NULL)
-		return (NULL);
+	str_new = gc_alloc(sizeof(char) * (ft_strlen(str) + 2));
 	while (str[i])
 	{
 		str_new[i] = str[i];
@@ -31,7 +30,7 @@ static char		*ft_append_char(char *str, char c)
 	return (str_new);
 }
 
-int				get_next_line(char **line)
+int	get_next_line(char **line)
 {
 	char	c;
 	int		ret;
@@ -39,17 +38,20 @@ int				get_next_line(char **line)
 
 	c = '\0';
 	ret = 1;
-	if ((str = gc_alloc(sizeof(char) * 1)) == NULL)
-		return (-1);
+	str = gc_alloc(sizeof(char) * 1);
 	str[0] = '\0';
 	while (c != '\n' && ret != 0)
 	{
-		if ((ret = read(0, &c, 1)) == -1)
+		ret = read(0, &c, 1);
+		if (ret == -1)
 			return (-1);
 		else if (c != '\n' && ret != 0)
-			if ((str = ft_append_char(str, c)) == NULL)
+		{
+			str = ft_append_char(str, c);
+			if (str == NULL)
 				return (-1);
+		}
 	}
 	*line = str;
-	return (ret == 0 ? 0 : 1);
+	return (ret != 0);
 }

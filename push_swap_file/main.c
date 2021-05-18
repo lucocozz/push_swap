@@ -6,14 +6,14 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:23:55 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 21:39:24 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 02:29:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void			ft_get_segments(t_pile_data *data, t_pile *pile_sort,
-	int size, int factor)
+static void	ft_get_segments(t_pile_data *data, t_pile *pile_sort, int size,
+	int factor)
 {
 	t_count	c;
 	t_pile	*tmp_sort;
@@ -50,9 +50,16 @@ static t_pile_data	ft_get_pile_data(t_pile *pile)
 
 	pile_sort = ft_pile_sort_insert(pile);
 	size = ft_pile_size(pile_sort);
-	factor = (size < 250 ? 15 : 35);
+	if (size < 250)
+		factor = 15;
+	else
+		factor = 35;
 	if (size >= factor)
-		data.size = (size / factor) + (size % factor ? 1 : 0);
+	{
+		data.size = (size / factor);
+		if (size % factor)
+			data.size++;
+	}
 	else
 		data.size = 1;
 	data.segments = gc_alloc(sizeof(t_range) * (data.size + 1));
@@ -61,7 +68,7 @@ static t_pile_data	ft_get_pile_data(t_pile *pile)
 	return (data);
 }
 
-int					main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int			i;
 	t_stacks	piles;

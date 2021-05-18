@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 04:53:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/27 16:39:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 02:38:43 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 # include "libft.h"
 
-typedef struct		s_pile
+typedef struct s_pile
 {
 	int				value;
 	struct s_pile	*next;
 	struct s_pile	*prev;
 }					t_pile;
 
-typedef struct		s_stacks
+typedef struct s_stacks
 {
 	t_pile			*a;
 	t_pile			*b;

@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 19:05:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/27 16:36:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 02:26:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int			ft_push_to_b(t_stacks *piles, t_sort_list **sort_list,
+static int	ft_push_to_b(t_stacks *piles, t_sort_list **sort_list,
 	t_pile_data data, int seg)
 {
 	int	j;
@@ -54,7 +54,7 @@ static t_sort_list	*ft_split_segments(t_stacks *piles, t_pile_data data)
 	return (sort_list);
 }
 
-void				ft_sort_three(t_stacks *piles, t_sort_list **sort_list)
+void	ft_sort_three(t_stacks *piles, t_sort_list **sort_list)
 {
 	while (!ft_is_crescent(piles->a))
 	{
@@ -67,10 +67,10 @@ void				ft_sort_three(t_stacks *piles, t_sort_list **sort_list)
 	}
 }
 
-static void			ft_sort_a(t_stacks *piles, t_sort_list **sort_list,
+static void	ft_sort_a(t_stacks *piles, t_sort_list **sort_list,
 	t_pile **pile_sorted)
 {
-	t_pile *sorted;
+	t_pile	*sorted;
 
 	sorted = *pile_sorted;
 	if (piles->b->value == sorted->value)
@@ -87,7 +87,7 @@ static void			ft_sort_a(t_stacks *piles, t_sort_list **sort_list,
 	*pile_sorted = sorted;
 }
 
-t_sort_list			*ft_sort_pile(t_stacks *piles, t_pile_data data)
+t_sort_list	*ft_sort_pile(t_stacks *piles, t_pile_data data)
 {
 	t_pile		*pile_sorted;
 	t_sort_list	*sort_list;

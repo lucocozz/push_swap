@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:11:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/27 13:53:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 02:31:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 
 t_sort_list	*ft_create_sort_list(int value, int (*ft)(t_stacks*))
 {
-	t_sort_list *sort;
+	t_sort_list	*sort;
 
-	if ((sort = gc_alloc(sizeof(t_sort_list) * 1)) == NULL)
-		return (NULL);
+	sort = gc_alloc(sizeof(t_sort_list) * 1);
 	sort->value = value;
 	sort->ft = ft;
 	sort->next = NULL;
 	return (sort);
 }
 
-void		ft_push_back_sort(t_sort_list **sort_list, int value,
+void	ft_push_back_sort(t_sort_list **sort_list, int value,
 int (*ft)(t_stacks*))
 {
 	t_sort_list	*tmp;
@@ -41,9 +40,9 @@ int (*ft)(t_stacks*))
 	}
 }
 
-void		ft_clear_sort_list(t_sort_list *sort_list)
+void	ft_clear_sort_list(t_sort_list *sort_list)
 {
-	t_sort_list *prev;
+	t_sort_list	*prev;
 
 	while (sort_list)
 	{
@@ -53,7 +52,7 @@ void		ft_clear_sort_list(t_sort_list *sort_list)
 	}
 }
 
-void		ft_print_sort_list(t_sort_list *sort_list)
+void	ft_print_sort_list(t_sort_list *sort_list)
 {
 	static char	*sorts[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr",
 							"rra", "rrb", "rrr"};
@@ -66,7 +65,7 @@ void		ft_print_sort_list(t_sort_list *sort_list)
 	}
 }
 
-void		ft_sorting(t_stacks *piles, t_sort_list *sort_list)
+void	ft_sorting(t_stacks *piles, t_sort_list *sort_list)
 {
 	while (sort_list)
 	{

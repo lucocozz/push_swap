@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:26:25 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 17:34:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 02:34:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-static int			ft_init_sort_list(t_sort_list **sort_list, char *sort)
+static int	ft_init_sort_list(t_sort_list **sort_list, char *sort)
 {
 	if (!ft_strcmp(sort, "sa"))
 		ft_push_back_sort(sort_list, SA, &ft_sa);
@@ -47,10 +47,12 @@ static t_sort_list	*ft_get_sort_list(void)
 	char		*line;
 	t_sort_list	*sort_list;
 
+	ret = 1;
 	line = NULL;
 	sort_list = NULL;
-	while ((ret = get_next_line(&line)) == 1)
+	while (ret == 1)
 	{
+		ret = get_next_line(&line);
 		if (!ft_init_sort_list(&sort_list, line) || line[0] == '\0')
 		{
 			ft_clear_sort_list(sort_list);
@@ -61,17 +63,20 @@ static t_sort_list	*ft_get_sort_list(void)
 	}
 	if (ret == 0)
 		gc_free(line);
-	return (ret == -1 ? NULL : sort_list);
+	if (ret == -1)
+		return (NULL);
+	else
+		return (sort_list);
 }
 
-static int			ft_is_sorted(t_stacks piles)
+static int	ft_is_sorted(t_stacks piles)
 {
 	if (piles.b)
 		return (0);
 	return (ft_is_crescent(piles.a));
 }
 
-int					main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_stacks	piles;
 	t_sort_list	*sort_list;
@@ -82,7 +87,8 @@ int					main(int argc, char **argv)
 		piles.a = ft_parsing(argc - 1, &argv[1]);
 		if (ft_is_sorted(piles))
 			gc_exit(EXIT_SUCCESS, NULL);
-		if (!(sort_list = ft_get_sort_list()))
+		sort_list = ft_get_sort_list();
+		if (sort_list == NULL)
 			ft_exit_error(piles);
 		ft_sorting(&piles, sort_list);
 		if (ft_is_sorted(piles))

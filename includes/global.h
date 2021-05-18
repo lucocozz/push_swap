@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 19:34:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 21:31:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 02:39:37 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ enum					e_sort_list
 	RRR
 };
 
-typedef struct			s_sort_list
+typedef struct s_sort_list
 {
 	int					value;
 	int					(*ft)(t_stacks*);

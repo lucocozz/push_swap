@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:05:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/11 17:36:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 02:30:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct				s_garbage_lst
+typedef struct s_garbage_lst
 {
 	void					*ptr;
 	struct s_garbage_lst	*next;
