@@ -1,48 +1,49 @@
+PUSH_SWAP_NAME= push_swap
 CHECKER_NAME= checker
 
-PUSH_SWAP_NAME= push_swap
+PUSH_SWAP_SRCS= push_swap.c ft_sorting.c ft_sorting2.c
+PUSH_SWAP_OBJS= $(PUSH_SWAP_SRCS:%.c=%.o)
 
-CHECKER_SRCS=	main.c
+CHECKER_SRCS= checker.c
+CHECKER_OBJS= $(CHECKER_SRCS:%.c=%.o)
 
-PUSH_SWAP_SRCS=	main.c	ft_sorting.c	ft_sorting2.c
+GLOBAL_SRCS= ft_parsing.c sort_list.c sort.c sort2.c sort3.c
+GLOBAL_OBJS= $(GLOBAL_SRCS:%.c=%.o)
 
-GLOBAL_SRCS=	ft_parsing.c	sort_list.c		sort.c		sort2.c		\
-				sort3.c
+DEP= $(PUSH_SWAP_OBJS:%.o=%.d) $(CHECKER_OBJS:%.o=%.d) $(GLOBAL_OBJS:%.o=%.d)
 
-CHECKER= $(addprefix checker_file/, $(CHECKER_SRCS))
+CC= clang
 
-PUSH_SWAP= $(addprefix push_swap_file/, $(PUSH_SWAP_SRCS))
+CFLAGS= -MMD -Wall -Wextra -Werror
+CXXFLAGS= -I includes/ -I libft/includes/ -I libgc/includes/
+LDFLAGS = -L libft/ -lft -L libgc/ -lgc
 
-GLOBAL= $(addprefix global_file/, $(GLOBAL_SRCS))
+vpath %.c push_swap_file checker_file global_file
 
-CC=		clang
-
-CFLAGS= -Wall -Wextra -Werror -I includes/ -I libft/includes/ -L libft/ -lft	\
-		-L libgc/ -lgc -I libgc/includes/
-
-
-all: lib $(CHECKER_NAME) $(PUSH_SWAP_NAME)
+all: lib $(PUSH_SWAP_NAME) $(CHECKER_NAME)
 
 lib:
-	$(MAKE) -C libgc
-	$(MAKE) -C libft
+    $(MAKE) -C libgc
+    $(MAKE) -C libft
 
-$(CHECKER_NAME):
-	$(CC) $(CHECKER) $(GLOBAL) -o $(CHECKER_NAME) $(CFLAGS) $(INCL)
+$(CHECKER_NAME): $(CHECKER_OBJS) $(GLOBAL_OBJS) | lib
+    $(CC) $(CXXFLAGS) $^ -o $(CHECKER_NAME) $(LDFLAGS)
 
-$(PUSH_SWAP_NAME):
-	$(CC) $(PUSH_SWAP) $(GLOBAL) -o $(PUSH_SWAP_NAME) $(CFLAGS) $(INCL)
+$(PUSH_SWAP_NAME): $(PUSH_SWAP_OBJS) $(GLOBAL_OBJS) | lib
+    $(CC) $(CXXFLAGS) $^ -o $(PUSH_SWAP_NAME) $(LDFLAGS)
+
+-include $(DEP)
+%.o: %.c
+    $(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(CHECKER_OBJS)
-	rm -f $(PUSH_SWAP_OBJS)
-	$(MAKE) clean -C libft
-	$(MAKE) clean -C libgc
+    rm -f $(CHECKER_OBJS) $(GLOBAL_OBJS) $(PUSH_SWAP_OBJS) $(DEP)
+    $(MAKE) clean -C libft
+    $(MAKE) clean -C libgc
 
-fclean:
-	rm -f $(CHECKER_NAME) $(CHECKER_OBJS)
-	rm -f $(PUSH_SWAP_NAME) $(PUSH_SWAP_OBJS)
-	$(MAKE) fclean -C libft
-	$(MAKE) fclean -C libgc
+fclean: clean
+    rm -f $(CHECKER_NAME) $(PUSH_SWAP_NAME)
+    $(MAKE) fclean -C libft
+    $(MAKE) fclean -C libgc
 
 re: fclean all
