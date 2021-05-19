@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 17:26:25 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/18 02:34:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:49:00 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ static t_sort_list	*ft_get_sort_list(void)
 	char		*line;
 	t_sort_list	*sort_list;
 
-	ret = 1;
 	line = NULL;
 	sort_list = NULL;
-	while (ret == 1)
+	while (1)
 	{
 		ret = get_next_line(&line);
+		if (ret != 1)
+			break ;
 		if (!ft_init_sort_list(&sort_list, line) || line[0] == '\0')
 		{
 			ft_clear_sort_list(sort_list);
